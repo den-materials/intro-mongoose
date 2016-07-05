@@ -220,10 +220,8 @@ Folders/files:
 ```bash
 $ mkdir db
 $ mkdir models
-$ touch models/author.js
 $ touch models/reminder.js
-$ touch db/schema.js
-$ touch db/seeds.js
+$ touch db/seed.js
 ```
 
 We will define the structure of our database using schemas
@@ -284,6 +282,8 @@ Reminder.create(reminders, function(err, docs) {
   }
 });
 ```
+
+Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
 <!-- 11:15 10 minutes -->
 
