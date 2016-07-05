@@ -24,7 +24,7 @@ By the end of this lesson you should be able to...
 * **Compare** and **contrast** Mongoose with Mongo
 * **Create** Mongoose schemas & models
 * **Integrate** Mongoose with Express
-* **Build out** `#index`, `#new`, and `#create` routes with Mongoose & Express
+* **Build out** `index`, `new`, and `create` routes with Mongoose & Express
 
 ## Why
 
@@ -206,7 +206,7 @@ $ npm install --save express ejs body-parser mongoose
 $ touch index.js
 ```
 
-The 5 dependencies we'll be using for this app are:
+The dependencies we'll be using for this app are:
 
   1. `express` - web Frameworks
   1. `ejs` - view engine
@@ -285,7 +285,7 @@ Reminder.create(reminders, function(err, docs) {
 
 Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
-<!-- 11:15 10 minutes -->
+<!-- 11:15 5 minutes -->
 
 ## Server Setup
 
@@ -321,7 +321,7 @@ app.listen(port, function() {
 });
 ```
 
-<!--11:25 10 minutes -->
+<!--11:20 10 minutes -->
 
 ## Reminders Index
 
@@ -381,14 +381,14 @@ In `views/reminders/index.ejs`:
 <ul>
   <% for(var i=0; i< reminders.length; i++) {%>
     <li class="reminder">
-      <a class="reminder-title" href="/reminders/{{_id}}"><%= reminders[i].title %>:</a>
+      <a class="reminder-title" href="<%= '/reminders/'+reminders[i]._id %>"><%= reminders[i].title %>:</a>
       <span class="reminder-body"><%= reminders[i].body %></span>
     </li>
   <% } %>
 </ul>
 ```
 
-<!--11:35 10 minutes -->
+<!--11:30 10 minutes -->
 
 ## New Reminder
 
@@ -443,11 +443,11 @@ module.exports = remindersController;
 
 ![congrats](images/elfCongrats.gif)
 
-<!-- 11:45 5 minutes -->
+<!-- 11:40 5 minutes -->
 
 ## Show Page (You do)
 
-* User should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays more specific information about that reminder.
+* User should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
 
 <!--CFU: Think-pair-share: What is the most helpful thing about Mongoose in your opinion? -->
 
