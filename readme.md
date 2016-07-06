@@ -11,7 +11,7 @@ Market: DEN
 
 <!-- Hook: (Show hands) How many of you know about SQL?  How many of you love SQL?  How many of you have had a SQL syntax problem that drove you crazy?  This is the reason that so many frameworks and modelers have been developed.  
 
-(Show hands) Who feels Mongo is better than plain Javascript?
+(Show hands) Who feels Mongo is better than good ol' Javascript?
 
 -->
 
@@ -68,6 +68,8 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 
 -[Peter Lyons Apr 8 '14 at 23:53](http://stackoverflow.com/a/22950402)
 
+<!-- Explain: in this lesson, I will be the only one typing, but I need help from all the devs to shout out next step, so need them to be following along. -->
+
 <!--10:45 15 minutes -->
 ## Example (I do)
 
@@ -97,7 +99,7 @@ mongoose.connect("mongodb://localhost/test");
 
 ###Modeling
 
-Let's create `Book` model. A `Book` has a few different characteristics: `title`, `author`, and `description`.
+Let's create a `Book` model. A `Book` has a few different characteristics: `title`, `author`, and `description`.
 
 To create a `Book` model we have to use a Schema:
 
@@ -136,7 +138,7 @@ Once you're done building you can save the book.
 ```javascript
 book.save()
 ```
->Note: you can pass save a function that will be called (aka a callback) once the `book` is done being saved.
+>Note: you can pass a function that will be called (aka a callback) once the `book` is done being saved.
 
 If you want to build & save in one step you can use `.create`. Also we'll pass it a callback to execute once it's done creating the book.
 
@@ -189,6 +191,8 @@ Other removal methods include:
 findByIdAndRemove();
 findOneAndRemove();
 ```
+
+<!--CFU: What command do I use to search for a document with Mongoose?  What command do I use to make and save a new document? -->
 
 <!--11:00 15 minutes -->
 
@@ -283,13 +287,13 @@ Reminder.create(reminders, function(err, docs) {
 });
 ```
 
-Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
+>Challenge: Create your own reminder project, but personalize the reminders to suit your own interests and errands. Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
 <!-- 11:15 5 minutes -->
 
 ## Server Setup
 
-Now that we've got all of our models and seed data set. Let's start building out the reminders application. Let's update our main application file to include the dependencies we'll need.
+Now we've got all of our models and seed data set. Let's start building out the reminders application. Let's update our main application file to include the dependencies we'll need.
 
 In `index.js`:
 
@@ -320,6 +324,8 @@ app.listen(port, function() {
   console.log("app is running on port:", port);
 });
 ```
+
+>Challenge: Build out your own server file.  Make sure it works by running it with ```node``` or ```nodemon```.
 
 <!--11:20 10 minutes -->
 
@@ -388,6 +394,8 @@ In `views/reminders/index.ejs`:
 </ul>
 ```
 
+>Challenge: Create these template files in your own project.  What happens when you try to go to ```localhost:3000/reminders```?
+
 <!--11:30 10 minutes -->
 
 ## New Reminder
@@ -447,9 +455,10 @@ module.exports = remindersController;
 
 ## Show Page (You do)
 
-* User should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
+* First, verify that a user can see reminders on ```localhost:3000/reminders```.  Also, check that a user can make a new reminder by going to ```localhost:3000/new```.
+* A user should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Add that functionality to your reminders page.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
 
-<!--CFU: Think-pair-share: What is the most helpful thing about Mongoose in your opinion? -->
+<!--CFU: Think-pair-share: What is the most important thing you learned to do today (Mongo or Mongoose)? -->
 
 <!-- Closing
 
