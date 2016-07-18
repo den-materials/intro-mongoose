@@ -474,3 +474,7 @@ Checkout the `solution-code` directory and examine the file `db/console.js`. It 
 #### Refactor
 * How would you refactor your `index.js` so that all the configuration logic lived in a file `config/config.js`?
 * How about refactoring the code so that your routes live in `config/routes.js`?
+
+## Licensing
+All content is licensed under a CC­BY­NC­SA 4.0 license.
+All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact legal@ga.co.
