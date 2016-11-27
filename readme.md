@@ -73,12 +73,12 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 <!--10:45 15 minutes -->
 ## Example (I do)
 
-From the console:  
+From the console:
 
 ```
 mkdir mongoose_project
 cd mongoose_project
-npm init
+npm init -y
 npm install --save mongoose
 ```
 
@@ -121,7 +121,7 @@ Check the docs to see all the different [datatypes](http://mongoosejs.com/docs/s
 
 ###Create: Building and Creating Documents
 
-If you want to build a new `Book` in memory you can just do the following:
+If you want to build a new `Book`, you can just do the following:
 
 ```javascript
 var book = new Book({title: "Alice's Adventures In Wonderland"});
@@ -205,7 +205,7 @@ Lets create a brand new express application and grab up all the dependencies we'
 ```bash
 $ mkdir reminders
 $ cd reminders
-$ npm init
+$ npm init -y
 $ npm install --save express ejs body-parser mongoose
 $ touch index.js
 ```
@@ -287,7 +287,9 @@ Reminder.create(reminders, function(err, docs) {
 });
 ```
 
->Challenge: Create your own reminder project, but personalize the reminders to suit your own interests and errands. Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
+Feel free to personalize the reminders to suit your own interests and errands. 
+
+Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
 <!-- 11:15 5 minutes -->
 
@@ -307,7 +309,7 @@ var bodyParser = require('body-parser');
 // Configuration
 mongoose.connect('mongodb://localhost/reminders');
 process.on('exit', function() { mongoose.disconnect() }); // Shutdown Mongoose correctly
-app.set("view engine", "ejs");  // sets view engine to handlebars
+app.set("view engine", "ejs");  // sets view engine to EJS
 app.use(bodyParser.json());  // allows for parameters in JSON and html
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + '/public'));  // looks for assets like stylesheets in a `public` folder
@@ -375,7 +377,7 @@ In `views/layout.ejs`:
       <a href="/reminders/new">+ Reminder</a>
     </header>
     <hr>
-    <!-- the below `triple-stash`, avoid handlebars escaping any html -->
+    <!-- the below `triple-stash`, avoid escaping any html -->
    <%- body %>
   </body>
 </html>
