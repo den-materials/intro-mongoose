@@ -458,7 +458,7 @@ module.exports = remindersController;
 
 ## Show Page (You do)
 
-* First, verify that a user can see reminders on ```localhost:3000/reminders```.  Also, check that a user can make a new reminder by going to ```localhost:3000/new```.
+* First, verify that a user can see reminders on ```localhost:3000/reminders```.  Also, check that a user can make a new reminder by going to ```localhost:3000/reminders/new```.
 * A user should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Add that functionality to your reminders page.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
 
 <!--CFU: Think-pair-share: What is the most important thing you learned to do today (Mongo or Mongoose)? -->
