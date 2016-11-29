@@ -7,6 +7,8 @@ Market: DEN
 
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
+<!--We should probably change 'reminders' (the project folder) to 'reminders_app' and 'body' (reminders property) should be 'message' so we don't have such overloaded terms -->
+
 <!--10:30 5 minutes -->
 
 <!-- Hook: (Show hands) How many of you know about SQL?  How many of you love SQL?  How many of you have had a SQL syntax problem that drove you crazy?  This is the reason that so many frameworks and modelers have been developed.  
