@@ -17,7 +17,7 @@ Market: DEN
 
 -->
 
-#Intro Mongoose
+# Intro to Mongoose
 
 ## Learning Objectives
 
@@ -47,7 +47,7 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
     lastName: String,
     address: String
     phoneNumber: Number,
-    email: String
+    email: String,
     professionalContact: Boolean
   });
 ```
@@ -60,22 +60,30 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
   var Contact = mongoose.model('Contact', ContactSchema);
 ```
 
-####Schema vs. Model
+#### Schema vs. Model
 
 >"In mongoose, a schema represents the structure of a particular document, either completely or just a portion of the document. It's a way to express expected properties and values as well as constraints and indexes. A model defines a programming interface for interacting with the database (read, insert, update, etc). So a schema answers "what will the data in this collection look like?" and a model provides functionality like "Are there any records matching this query?" or "Add a new document to the collection". ""
+
+-[Peter Lyons Apr 8 '14 at 23:53](http://stackoverflow.com/a/22950402)
+
+In other words, a `Schema` is like an empty portion plate:
+![portion plate](images/portionPlate.jpg)
+
+That your lunchlady (the `Model`) will be filling to create new `Instances` of your meal:
+![portion plate](images/filledPlate.png)
 
 <!-- Analogy on the board: schema -> skeleton, model -> body -->
 
 <!--CFU: Catch-phrase with Schema, Model, Mongo, and Mongoose in pairs -->
 
--[Peter Lyons Apr 8 '14 at 23:53](http://stackoverflow.com/a/22950402)
+
 
 <!-- Explain: in this lesson, I will be the only one typing, but I need help from all the devs to shout out next step, so need them to be following along. -->
 
 <!--10:45 15 minutes -->
 ## Example (I do)
 
-From the console:
+From the console: 
 
 ```
 mkdir mongoose_project
@@ -99,7 +107,7 @@ var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/test");
 ```
 
-###Modeling
+### Modeling
 
 Let's create a `Book` model. A `Book` has a few different characteristics: `title`, `author`, and `description`.
 
@@ -138,7 +146,7 @@ book.author = "Lewis Carroll";
 Once you're done building you can save the book.
 
 ```javascript
-book.save()
+book.save();
 ```
 >Note: you can pass a function that will be called (aka a callback) once the `book` is done being saved.
 
@@ -250,7 +258,7 @@ var Reminder = mongoose.model("Reminder", ReminderSchema);
 module.exports = Reminder;
 ```
 
-Great now that we have an interface for our models, let's create a seed file so we have some data to work with in our application.
+Great! Now that we have an interface for our models, let's create a seed file so we have some data to work with in our application.
 
 In `db/seed.js`:
 
@@ -335,12 +343,14 @@ app.listen(port, function() {
 
 ## Reminders Index
 
-As we can see on the last line of the code above, we have just one route. It's using `remindersController.index ` as a callback, but it hasn't been defined yet. Let's define it now.
+As we can see on the last line of the code above, we have just one route. It's using `remindersController.index ` as a callback, but it hasn't been defined yet. Let's define it now:
 
 ```bash
 $ mkdir controllers
 $ touch controllers/remindersController.js
 ```
+
+And then add this into our new remindersController.js file:
 
 ```js
 var Reminder = require("../models/reminder")
@@ -356,7 +366,7 @@ var remindersController = {
 module.exports = remindersController;
 ```
 
-We're rendering a ejs view that doesn't exist yet. Lets create it now as well as our layout view.
+Now we're referncing an ejs view that doesn't exist yet. Lets create that now, as well as our layout view:
 
 ```bash
 $ mkdir views
@@ -456,23 +466,24 @@ module.exports = remindersController;
 
 ![congrats](images/elfCongrats.gif)
 
-<!-- 11:40 5 minutes -->
-
-## Show Page (You do)
-
 * First, verify that a user can see reminders on ```localhost:3000/reminders```.  Also, check that a user can make a new reminder by going to ```localhost:3000/reminders/new```.
-* A user should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Add that functionality to your reminders page.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
+
 
 <!--CFU: Think-pair-share: What is the most important thing you learned to do today (Mongo or Mongoose)? -->
 
 <!-- Closing
 
-Mongoose is an extension of the logic that made Node and Express grow in popularity: if we can write it all in Javascript, we have no major miscommunication issues in the stack.  For tomorrow, think about a specific thing you'd like to do in pure Javascript to incorporate into your app.  Chances are, there's already a library for it.  If not, you'll have a really fun project idea. -->
+Mongoose is an extension of the logic that made Node and Express grow in popularity: if we can write it all in Javascript, we have no major miscommunication issues in the stack.  For tomorrow, think about a specific thing you'd like to do in pure Javascript to incorporate into your app.  Chances are, there's already a library for it.  If not, you'll have a really fun project idea. --> 
 
-## Bonus
+## Bonus!
+
+#### Show a Single ToDo
+
+* A user should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Add that functionality to your reminders page.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
 
 #### CRUDing in the Console
-Checkout the `solution-code` directory and examine the file `db/console.js`. It drops you into a REPL session with the database and all your models pre-loaded. You can run `node db/console.js` to see for yourself. CRUD some data in this REPL.
+
+* Checkout the `solution-code` directory and examine the file `db/console.js`. It drops you into a REPL session with the database and all your models pre-loaded. You can run `node db/console.js` to see for yourself. CRUD some data in this REPL.
 >Note: If for some reason it's not working, try restarting your `mongod` process.
 
 #### Refactor

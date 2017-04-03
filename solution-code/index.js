@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 // Configuration
 mongoose.connect('mongodb://localhost/reminders');
 process.on('exit', function() { mongoose.disconnect() }); // Shutdown Mongoose correctly
-app.set("view engine", "ejs");  // sets view engine to handlebars
+app.set("view engine", "ejs");  // sets view engine to EJS
 app.use(bodyParser.json());  // allows for parameters in JSON and html
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + '/public'));  // looks for assets like stylesheets in a `public` folder
