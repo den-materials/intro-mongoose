@@ -80,6 +80,8 @@ That your lunchlady (the `Model`) will be filling to create new `Instances` of y
 
 <!-- Explain: in this lesson, I will be the only one typing, but I need help from all the devs to shout out next step, so need them to be following along. -->
 
+<!--Doing this as a catch-up for WDI4 cuz we had a headstart-->
+<!--WDI4 1:33 -->
 <!--10:45 15 minutes -->
 ## Example (I do)
 
@@ -97,6 +99,7 @@ We need to make sure MongoDB is running.  From the console, enter this command:
 ```
 mongod
 ```
+<!--WDI4 1:42 -->
 
 Create a new Javascript file by typing `touch index.js` into the terminal.
 
@@ -127,9 +130,11 @@ and finally create the model
 var Book = mongoose.model('Book', BookSchema);
 ```
 
+<!--1:57 WDI4 -->
+
 Check the docs to see all the different [datatypes](http://mongoosejs.com/docs/schematypes.html) we can use in a Schema.
 
-###Create: Building and Creating Documents
+### Create: Building and Creating Documents
 
 If you want to build a new `Book`, you can just do the following:
 
@@ -148,6 +153,9 @@ Once you're done building you can save the book.
 ```javascript
 book.save();
 ```
+
+<!--WDI4 2:06 -->
+
 >Note: you can pass a function that will be called (aka a callback) once the `book` is done being saved.
 
 If you want to build & save in one step you can use `.create`. Also we'll pass it a callback to execute once it's done creating the book.
@@ -158,7 +166,9 @@ Book.create({title: "The Giver"}, function (err, book) {
 });
 ```
 
-###Read
+<!--WDI4 just showed .create -->
+
+### Read
 
 We can find books by any field, including `author`:
 
@@ -176,6 +186,8 @@ Book.find({}, function(err, books){
 });
 ```
 
+<!--WDI4 2:13 -->
+
 Try out some of the other find methods.
 
 ```javascript
@@ -184,7 +196,7 @@ Try out some of the other find methods.
 ```
 Reference the [docs](http://mongoosejs.com/docs/guide.html) for more info on what you can do with Mongoose queries and models (use the left-hand side-bar).
 
-###Destroy
+### Destroy
 Removing a Document is as simple as Building and Creating.
 
 Using the remove method:
@@ -203,6 +215,8 @@ findOneAndRemove();
 ```
 
 <!--CFU: What command do I use to search for a document with Mongoose?  What command do I use to make and save a new document? -->
+
+<!--WDI4 2:30 -->
 
 <!--11:00 15 minutes -->
 
@@ -238,6 +252,8 @@ $ touch models/reminder.js
 $ touch db/seed.js
 ```
 
+<!--WDI4 2:39 -->
+
 We will define the structure of our database using schemas
 
 In `models/reminder.js`:
@@ -259,6 +275,8 @@ module.exports = Reminder;
 ```
 
 Great! Now that we have an interface for our models, let's create a seed file so we have some data to work with in our application.
+
+<!--WDI4 2:48 -->
 
 In `db/seed.js`:
 
@@ -301,7 +319,10 @@ Feel free to personalize the reminders to suit your own interests and errands.
 
 Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
+<!--WDI4 2:55 -->
+
 <!-- 11:15 5 minutes -->
+<!--WDI4 3:05 -->
 
 ## Server Setup
 
@@ -407,6 +428,8 @@ In `views/reminders/index.ejs`:
   <% } %>
 </ul>
 ```
+
+<!--3:30 turning over to devs WDI4 -->
 
 >Challenge: Create these template files in your own project.  What happens when you try to go to ```localhost:3000/reminders```?
 
