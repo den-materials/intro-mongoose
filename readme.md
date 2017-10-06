@@ -17,6 +17,8 @@ Market: DEN
 
 -->
 
+<!--WDI5 1:38 -->
+
 # Intro to Mongoose
 
 ## Learning Objectives
@@ -36,13 +38,14 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 
 >—Creators of Mongoose.
 
+<!--1:44 WDI5 -->
 <!--10:35 10 minutes -->
 
 ## Terminology
 - **Schema**: Similar to an object constructor, a Schema is a diagram or blueprint for what every object in the noSQL database will contain.  Here's an example of a simple Address Book noSQL database schema:  
 
 ```javascript
-  var ContactSchema = new Schema({
+  let ContactSchema = new Schema({
     firstName: String,
     lastName: String,
     address: String
@@ -57,7 +60,7 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 - **Model**: A model is a Schema that has been 'activated' with real data and is performing actions such as reading, saving, updating, etc.
 
 ```javascript
-  var Contact = mongoose.model('Contact', ContactSchema);
+  let Contact = mongoose.model('Contact', ContactSchema);
 ```
 
 #### Schema vs. Model
@@ -82,6 +85,7 @@ That your lunchlady (the `Model`) will be filling to create new `Instances` of y
 
 <!--Doing this as a catch-up for WDI4 cuz we had a headstart-->
 <!--WDI4 1:33 -->
+<!--WDI5 1:54 -->
 <!--10:45 15 minutes -->
 ## Example (I do)
 
@@ -100,13 +104,14 @@ We need to make sure MongoDB is running.  From the console, enter this command:
 mongod
 ```
 <!--WDI4 1:42 -->
+<!--WDI5 1:58 -->
 
 Create a new Javascript file by typing `touch index.js` into the terminal.
 
 Let's require mongoose and connect to our database.
 
 ```javascript
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/test");
 ```
 
@@ -117,8 +122,8 @@ Let's create a `Book` model. A `Book` has a few different characteristics: `titl
 To create a `Book` model we have to use a Schema:
 
 ```javascript
-var Schema = mongoose.Schema;
-var BookSchema = new Schema({
+let Schema = mongoose.Schema;
+let BookSchema = new Schema({
     title: String,
     author: String,
     description: String
@@ -127,10 +132,11 @@ var BookSchema = new Schema({
 and finally create the model
 
 ```javascript
-var Book = mongoose.model('Book', BookSchema);
+let Book = mongoose.model('Book', BookSchema);
 ```
 
 <!--1:57 WDI4 -->
+<!--WDI5 2:05 -->
 
 Check the docs to see all the different [datatypes](http://mongoosejs.com/docs/schematypes.html) we can use in a Schema.
 
@@ -139,7 +145,7 @@ Check the docs to see all the different [datatypes](http://mongoosejs.com/docs/s
 If you want to build a new `Book`, you can just do the following:
 
 ```javascript
-var book = new Book({title: "Alice's Adventures In Wonderland"});
+let book = new Book({title: "Alice's Adventures In Wonderland"});
 ```
 
 Then you can still edit it before saving.
@@ -167,6 +173,7 @@ Book.create({title: "The Giver"}, function (err, book) {
 ```
 
 <!--WDI4 just showed .create -->
+<!--WDI5 2:13 -->
 
 ### Read
 
@@ -196,6 +203,8 @@ Try out some of the other find methods.
 ```
 Reference the [docs](http://mongoosejs.com/docs/guide.html) for more info on what you can do with Mongoose queries and models (use the left-hand side-bar).
 
+<!--WDI5 2:21 -->
+
 ### Destroy
 Removing a Document is as simple as Building and Creating.
 
@@ -207,6 +216,7 @@ Book.remove({ title: "The Giver" }, function(err, book) {
   console.log("removal of " + book.title + " successful.");
 });
 ```
+
 Other removal methods include:
 
 ```js
@@ -216,11 +226,14 @@ findOneAndRemove();
 
 <!--CFU: What command do I use to search for a document with Mongoose?  What command do I use to make and save a new document? -->
 
+<!--WDI5 2:28  -->
 <!--WDI4 2:30 -->
 
 <!--11:00 15 minutes -->
 
 ## Integrating Mongoose into Express
+
+<!--WDI5 2:38  -->
 
 Well, that's nice. But let's see how mongoose plays with express by building a reminders app. called [reminders](https://github.com/ga-dc/reminders_mongo)
 
@@ -252,6 +265,7 @@ $ touch models/reminder.js
 $ touch db/seed.js
 ```
 
+<!--WDI5 2:45  -->
 <!--WDI4 2:39 -->
 
 We will define the structure of our database using schemas
@@ -260,37 +274,38 @@ In `models/reminder.js`:
 
 ```js
 // requiring mongoose dependency
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // defining schema for reminders
-var ReminderSchema = new mongoose.Schema({
+let ReminderSchema = new mongoose.Schema({
   title: String,
   body: String,
   createdAt: { type : Date, default: new Date() }
 });
 // define the model
-var Reminder = mongoose.model("Reminder", ReminderSchema);
+let Reminder = mongoose.model("Reminder", ReminderSchema);
 // export the model to any files that `require` this one
 module.exports = Reminder;
 ```
 
 Great! Now that we have an interface for our models, let's create a seed file so we have some data to work with in our application.
 
+<!--WDI5 2:52  -->
 <!--WDI4 2:48 -->
 
 In `db/seed.js`:
 
 ```js
-var mongoose = require('mongoose');
-var conn = mongoose.connect('mongodb://localhost/reminders');
-var Reminder = require("../models/reminder");
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/reminders');
+let Reminder = require("../models/reminder");
 Reminder.remove({}, function(err) {
   if (err) {
     console.log("ERROR:", err);
   }
 })
 
-var reminders = [
+let reminders = [
   {
     title: "Cat",
     body: "Figure out his halloween costume for next year"
@@ -319,9 +334,10 @@ Feel free to personalize the reminders to suit your own interests and errands.
 
 Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
+<!--WDI5 3:06  -->
 <!--WDI4 2:55 -->
 
-<!-- 11:15 5 minutes -->
+<!-- 11:15 5 minutes REALLY?! 5 minutes for this?!-->
 <!--WDI4 3:05 -->
 
 ## Server Setup
@@ -332,10 +348,10 @@ In `index.js`:
 
 ```js
 // Dependencies
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // Configuration
 mongoose.connect('mongodb://localhost/reminders');
@@ -347,7 +363,7 @@ app.use(express.static(__dirname + '/public'));  // looks for assets like styles
 var port = 3000;  // define a port to listen on
 
 // Controllers
-var remindersController = require("./controllers/remindersController");
+let remindersController = require("./controllers/remindersController");
 
 // Routes
 app.get("/reminders", remindersController.index);
@@ -360,6 +376,7 @@ app.listen(port, function() {
 
 >Challenge: Build out your own server file.  Make sure it works by running it with ```node``` or ```nodemon```.
 
+<!--WDI5 3:15 -->
 <!--11:20 10 minutes -->
 
 ## Reminders Index
@@ -386,6 +403,8 @@ var remindersController = {
 
 module.exports = remindersController;
 ```
+
+<!--3:28 WDI5 -->
 
 Now we're referncing an ejs view that doesn't exist yet. Lets create that now, as well as our layout view:
 
