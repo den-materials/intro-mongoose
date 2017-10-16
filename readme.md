@@ -243,7 +243,7 @@ Lets create a brand new express application and grab up all the dependencies we'
 $ mkdir reminders
 $ cd reminders
 $ npm init -y
-$ npm install --save express ejs body-parser mongoose
+$ npm install --save express ejs ejs-locals body-parser mongoose
 $ touch index.js
 ```
 
@@ -251,6 +251,7 @@ The dependencies we'll be using for this app are:
 
   1. `express` - web Frameworks
   1. `ejs` - view engine
+  1. `ejs-locals` - EJS tool that allows us to use layouts
   1. `body-parser` - allows us to get parameter values from forms
   1. `mongoose` - our Mongo ODM
 
@@ -352,10 +353,12 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const engine = require('ejs-locals');
 
 // Configuration
 mongoose.connect('mongodb://localhost/reminders');
 process.on('exit', function() { mongoose.disconnect() }); // Shutdown Mongoose correctly
+app.engine('ejs', engine);  // sets EJS engine
 app.set("view engine", "ejs");  // sets view engine to EJS
 app.use(bodyParser.json());  // allows for parameters in JSON and html
 app.use(bodyParser.urlencoded({extended:true}));
@@ -438,6 +441,7 @@ In `views/layout.ejs`:
 In `views/reminders/index.ejs`:
 
 ```html
+<% layout('../layout') -%>
 <ul>
   <% for(var i=0; i< reminders.length; i++) {%>
     <li class="reminder">
@@ -467,6 +471,7 @@ app.post("/reminders", remindersController.create);
 Our views/reminders/new.ejs should look something like this:
 
 ```html
+<% layout('../layout') -%>
 <h2>Create a New Reminder</h2>
 <form action="/reminders" method="post">
   <label for="reminder-title">Title:</label>
