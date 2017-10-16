@@ -2,10 +2,12 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+let engine = require('ejs-locals');
 
 // Configuration
 mongoose.connect('mongodb://localhost/reminders');
-process.on('exit', function() { mongoose.disconnect() }); // Shutdown Mongoose correctly
+process.on('exit', function() { mongoose.disconnect(); }); // Shutdown Mongoose correctly
+app.engine('ejs', engine);  // sets EJS engine
 app.set("view engine", "ejs");  // sets view engine to EJS
 app.use(bodyParser.json());  // allows for parameters in JSON and html
 app.use(bodyParser.urlencoded({extended:true}));
