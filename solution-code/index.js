@@ -1,11 +1,12 @@
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-let engine = require('ejs-locals');
+// Dependencies
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const engine = require('ejs-locals');
 
 // Configuration
-mongoose.connect('mongodb://localhost/reminders');
+mongoose.connect('mongodb://localhost/reminders_db');
 process.on('exit', function() { mongoose.disconnect(); }); // Shutdown Mongoose correctly
 app.engine('ejs', engine);  // sets EJS engine
 app.set("view engine", "ejs");  // sets view engine to EJS
@@ -15,7 +16,7 @@ app.use(express.static(__dirname + '/public'));  // looks for assets like styles
 var port = 3000;  // define a port to listen on
 
 // Controllers
-var remindersController = require("./controllers/remindersController");
+let remindersController = require("./controllers/reminders");
 
 // Routes
 app.get("/reminders", remindersController.index);

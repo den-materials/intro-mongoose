@@ -177,7 +177,7 @@ Book.create({title: "The Giver"}, function (err, book) {
 
 ### Read
 
-We can find books by any field, including `author`:
+We can find books by any `field`, including `author`:
 
 ```javascript
   Book.find({author: "Lewis Carroll"}, function (err, books) {
@@ -185,7 +185,7 @@ We can find books by any field, including `author`:
   });
 ```
 
-We can find ALL by specifying any `fields` we're filtering for, aka an empty object:
+We can find ALL by specifying no `fields` we want to filter for, which we represent with an empty object:
 
 ```javascript
 Book.find({}, function(err, books){
@@ -195,7 +195,7 @@ Book.find({}, function(err, books){
 
 <!--WDI4 2:13 -->
 
-Try out some of the other find methods.
+Other find methods include:
 
 ```javascript
 .findOne();
@@ -231,17 +231,19 @@ findOneAndRemove();
 
 <!--11:00 15 minutes -->
 
-## Integrating Mongoose into Express
+## Building a Full-stack App with Mongoose (we do)
+
+### Integrating Mongoose into Express
 
 <!--WDI5 2:38  -->
 
-Well, that's nice. But let's see how mongoose plays with express by building a reminders app. called [reminders](https://github.com/ga-dc/reminders_mongo)
+Now that we have a general idea of the Mongoose syntax, let's see how Mongoose plays with Express by building a full-stack reminders app.
 
-Lets create a brand new express application and grab up all the dependencies we'll need
+Lets create a brand new Express application and grab up all the dependencies we'll need
 
 ```bash
-$ mkdir reminders
-$ cd reminders
+$ mkdir reminders_app
+$ cd reminders_app
 $ npm init -y
 $ npm install --save express ejs ejs-locals body-parser mongoose
 $ touch index.js
@@ -260,9 +262,10 @@ Let's first start by defining our schema, models and creating some seed data.
 Folders/files:
 
 ```bash
-$ mkdir db
 $ mkdir models
 $ touch models/reminder.js
+
+$ mkdir db
 $ touch db/seed.js
 ```
 
@@ -280,7 +283,7 @@ const mongoose = require('mongoose');
 // defining schema for reminders
 let ReminderSchema = new mongoose.Schema({
   title: String,
-  body: String,
+  message: String,
   createdAt: { type : Date, default: new Date() }
 });
 // define the model
@@ -298,26 +301,26 @@ In `db/seed.js`:
 
 ```js
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/reminders');
+mongoose.connect('mongodb://localhost/reminders_db');
 let Reminder = require("../models/reminder");
 Reminder.remove({}, function(err) {
   if (err) {
     console.log("ERROR:", err);
   }
-})
+});
 
 let reminders = [
   {
     title: "Cat",
-    body: "Figure out his halloween costume for next year"
+    message: "Figure out his halloween costume for next year"
   },
   {
     title: "Laundry",
-    body: "Color-code socks"
+    message: "Color-code socks"
   },
   {
     title: "Spanish",
-    body: "Learn to count to ten to impress the ladies"
+    message: "Learn to count to five so I can sing 'Mambo Numero Cinco'"
   }
 ];
 
@@ -325,7 +328,7 @@ Reminder.create(reminders, function(err, docs) {
   if (err) {
     console.log("ERROR:", err);
   } else {
-    console.log("Created:", docs)
+    console.log("Created:", docs);
     mongoose.connection.close();
   }
 });
@@ -356,17 +359,17 @@ const bodyParser = require('body-parser');
 const engine = require('ejs-locals');
 
 // Configuration
-mongoose.connect('mongodb://localhost/reminders');
-process.on('exit', function() { mongoose.disconnect() }); // Shutdown Mongoose correctly
+mongoose.connect('mongodb://localhost/reminders_db');
+process.on('exit', function() { mongoose.disconnect(); }); // Shutdown Mongoose correctly
 app.engine('ejs', engine);  // sets EJS engine
 app.set("view engine", "ejs");  // sets view engine to EJS
 app.use(bodyParser.json());  // allows for parameters in JSON and html
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + '/public'));  // looks for assets like stylesheets in a `public` folder
-var port = 3000;  // define a port to listen on
+let port = 3000;  // define a port to listen on
 
 // Controllers
-let remindersController = require("./controllers/remindersController");
+let remindersController = require("./controllers/reminders");
 
 // Routes
 app.get("/reminders", remindersController.index);
@@ -388,28 +391,28 @@ As we can see on the last line of the code above, we have just one route. It's u
 
 ```bash
 $ mkdir controllers
-$ touch controllers/remindersController.js
+$ touch controllers/reminders.js
 ```
 
-And then add this into our new remindersController.js file:
+And then add this into our new `reminders.js` file:
 
 ```js
-var Reminder = require("../models/reminder")
+let Reminder = require("../models/reminder");
 
-var remindersController = {
+let remindersController = {
   index: function(req, res) {
     Reminder.find({}, function(err, docs) {
       res.render("reminders/index", {reminders: docs});
     });
   }
-}
+};
 
 module.exports = remindersController;
 ```
 
 <!--3:28 WDI5 -->
 
-Now we're referncing an ejs view that doesn't exist yet. Lets create that now, as well as our layout view:
+Now we're referencing an ejs view that doesn't exist yet. Lets create that now, as well as our layout view:
 
 ```bash
 $ mkdir views
@@ -446,7 +449,7 @@ In `views/reminders/index.ejs`:
   <% for(var i=0; i< reminders.length; i++) {%>
     <li class="reminder">
       <a class="reminder-title" href="<%= '/reminders/'+reminders[i]._id %>"><%= reminders[i].title %>:</a>
-      <span class="reminder-body"><%= reminders[i].body %></span>
+      <span class="reminder-message"><%= reminders[i].message %></span>
     </li>
   <% } %>
 </ul>
@@ -468,7 +471,7 @@ app.get("/reminders/new", remindersController.new);
 app.post("/reminders", remindersController.create);
 ```
 
-Our views/reminders/new.ejs should look something like this:
+Now create a file called `views/reminders/new.ejs`. It should look something like this:
 
 ```html
 <% layout('../layout') -%>
@@ -476,36 +479,36 @@ Our views/reminders/new.ejs should look something like this:
 <form action="/reminders" method="post">
   <label for="reminder-title">Title:</label>
   <input id="reminder-title" type="text" name="title">
-  <label for="reminder-body">Body:</label>
-  <input id="reminder-body" type="text" name="body">
+  <label for="reminder-message">Message:</label>
+  <input id="reminder-message" type="text" name="message">
   <input type="submit">
 </form>
 ```
 
-Finally our updated `remindersController` will be:
+Finally our updated `controllers/reminders.js` will be:
 
 ```js
-var Reminder = require("../models/reminder")
+let Reminder = require("../models/reminder");
 
-var remindersController = {
+let remindersController = {
   index: function(req, res) {
     Reminder.find({}, function(err, docs) {
       res.render("reminders/index", {reminders: docs});
     });
   },
   new: function(req, res) {
-    res.render("reminders/new")
+    res.render("reminders/new");
   },
   create: function(req, res) {
     // strong params
-    var title = req.body.title;
-    var body = req.body.body;
-    Reminder.create({title: title, body: body}, function(err, doc) {
+    let title = req.body.title;
+    let message = req.body.message;
+    Reminder.create({title: title, message: message}, function(err, doc) {
       // if there there is an error: redirect to reminders#new; else: redirect to reminders#index
       err ? res.redirect("/reminders/new") : res.redirect("/reminders");
-    })
+    });
   }
-}
+};
 
 module.exports = remindersController;
 ```
@@ -527,11 +530,6 @@ Mongoose is an extension of the logic that made Node and Express grow in popular
 #### Show a Single ToDo
 
 * A user should be able to click on any reminder's title on the `reminders` page and be directed to the specific `reminder` page that displays information about that reminder.  Add that functionality to your reminders page.  Bonus: add more information to this page that only shows up on this page, but not on the index page with all reminders.
-
-#### CRUDing in the Console
-
-* Checkout the `solution-code` directory and examine the file `db/console.js`. It drops you into a REPL session with the database and all your models pre-loaded. You can run `node db/console.js` to see for yourself. CRUD some data in this REPL.
->Note: If for some reason it's not working, try restarting your `mongod` process.
 
 #### Refactor
 * How would you refactor your `index.js` so that all the configuration logic lived in a file `config/config.js`?

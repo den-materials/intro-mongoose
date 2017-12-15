@@ -1,11 +1,13 @@
-var mongoose = require('mongoose');
+// requiring mongoose dependency
+const mongoose = require('mongoose');
 
-var ReminderSchema = new mongoose.Schema({
+// defining schema for reminders
+let ReminderSchema = new mongoose.Schema({
   title: String,
-  body: String,
-  createdAt: {type : Date, default: new Date()}
+  message: String,
+  createdAt: { type : Date, default: new Date() }
 });
-
-var Reminder = mongoose.model("Reminder", ReminderSchema);
-
+// define the model
+let Reminder = mongoose.model("Reminder", ReminderSchema);
+// export the model to any files that `require` this one
 module.exports = Reminder;
