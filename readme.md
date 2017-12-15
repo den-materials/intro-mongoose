@@ -7,9 +7,7 @@ Market: DEN
 
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-<!--We should probably change 'reminders' (the project folder) to 'reminders_app' and 'body' (reminders property) should be 'message' so we don't have such overloaded terms -->
-
-<!--10:30 5 minutes -->
+<!--1:30 5 minutes -->
 
 <!-- Hook: (Show hands) How many of you know about SQL?  How many of you love SQL?  How many of you have had a SQL syntax problem that drove you crazy?  This is the reason that so many frameworks and modelers have been developed.  
 
@@ -39,7 +37,7 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 >—Creators of Mongoose.
 
 <!--1:44 WDI5 -->
-<!--10:35 10 minutes -->
+<!--1:35 10 minutes -->
 
 ## Terminology
 - **Schema**: Similar to an object constructor, a Schema is a diagram or blueprint for what every object in the noSQL database will contain.  Here's an example of a simple Address Book noSQL database schema:  
@@ -83,10 +81,10 @@ That your lunchlady (the `Model`) will be filling to create new `Instances` of y
 
 <!-- Explain: in this lesson, I will be the only one typing, but I need help from all the devs to shout out next step, so need them to be following along. -->
 
-<!--Doing this as a catch-up for WDI4 cuz we had a headstart-->
 <!--WDI4 1:33 -->
 <!--WDI5 1:54 -->
-<!--10:45 15 minutes -->
+<!--1:45 20 minutes -->
+
 ## Example (I do)
 
 From the console: 
@@ -229,11 +227,9 @@ findOneAndRemove();
 <!--WDI5 2:28  -->
 <!--WDI4 2:30 -->
 
-<!--11:00 15 minutes -->
+<!--2:05 10 minutes -->
 
 ## Building a Full-stack App with Mongoose (we do)
-
-### Integrating Mongoose into Express
 
 <!--WDI5 2:38  -->
 
@@ -256,6 +252,10 @@ The dependencies we'll be using for this app are:
   1. `ejs-locals` - EJS tool that allows us to use layouts
   1. `body-parser` - allows us to get parameter values from forms
   1. `mongoose` - our Mongo ODM
+
+<!--2:15 10 minutes -->
+
+### Building our Model
 
 Let's first start by defining our schema, models and creating some seed data.
 
@@ -341,10 +341,10 @@ Now run the seed file in order to add these default values to our Database, by t
 <!--WDI5 3:06  -->
 <!--WDI4 2:55 -->
 
-<!-- 11:15 5 minutes REALLY?! 5 minutes for this?!-->
+<!-- 2:25 15 minutes-->
 <!--WDI4 3:05 -->
 
-## Server Setup
+### Server Setup
 
 Now we've got all of our models and seed data set. Let's start building out the reminders application. Let's update our main application file to include the dependencies we'll need.
 
@@ -383,7 +383,7 @@ app.listen(port, function() {
 >Challenge: Build out your own server file.  Make sure it works by running it with ```node``` or ```nodemon```.
 
 <!--WDI5 3:15 -->
-<!--11:20 10 minutes -->
+<!--2:40 15 minutes -->
 
 ## Reminders Index
 
@@ -459,7 +459,7 @@ In `views/reminders/index.ejs`:
 
 >Challenge: Create these template files in your own project.  What happens when you try to go to ```localhost:3000/reminders```?
 
-<!--11:30 10 minutes -->
+<!--3:05 15 minutes -->
 
 ## New Reminder
 
