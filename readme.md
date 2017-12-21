@@ -7,6 +7,7 @@ Market: DEN
 
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
+<!--WDI6 1:34 -->
 <!--1:30 5 minutes -->
 
 <!-- Hook: (Show hands) How many of you know about SQL?  How many of you love SQL?  How many of you have had a SQL syntax problem that drove you crazy?  This is the reason that so many frameworks and modelers have been developed.  
@@ -37,6 +38,7 @@ Mongoose is an ODM, an **Object Document Mapper**. It *maps* documents in a data
 >—Creators of Mongoose.
 
 <!--1:44 WDI5 -->
+<!--WDI6 1:40 -->
 <!--1:35 10 minutes -->
 
 ## Terminology
@@ -77,12 +79,11 @@ That your lunchlady (the `Model`) will be filling to create new `Instances` of y
 
 <!--CFU: Catch-phrase with Schema, Model, Mongo, and Mongoose in pairs -->
 
-
-
 <!-- Explain: in this lesson, I will be the only one typing, but I need help from all the devs to shout out next step, so need them to be following along. -->
 
 <!--WDI4 1:33 -->
 <!--WDI5 1:54 -->
+<!--WDI6 1:50  -->
 <!--1:45 20 minutes -->
 
 ## Example (I do)
@@ -135,6 +136,7 @@ let Book = mongoose.model('Book', BookSchema);
 
 <!--1:57 WDI4 -->
 <!--WDI5 2:05 -->
+<!--WDI6 1:57 -->
 
 Check the docs to see all the different [datatypes](http://mongoosejs.com/docs/schematypes.html) we can use in a Schema.
 
@@ -170,6 +172,7 @@ Book.create({title: "The Giver"}, function (err, book) {
 });
 ```
 
+<!--WDI6 2:08 -->
 <!--WDI4 just showed .create -->
 <!--WDI5 2:13 -->
 
@@ -224,6 +227,7 @@ findOneAndRemove();
 
 <!--CFU: What command do I use to search for a document with Mongoose?  What command do I use to make and save a new document? -->
 
+<!--WDI6 2:21 after tiny stretch break-->
 <!--WDI5 2:28  -->
 <!--WDI4 2:30 -->
 
@@ -282,9 +286,8 @@ const mongoose = require('mongoose');
 
 // defining schema for reminders
 let ReminderSchema = new mongoose.Schema({
-  title: String,
   message: String,
-  createdAt: { type : Date, default: new Date() }
+  title: { type : String, default: "Untitled Reminder" }
 });
 // define the model
 let Reminder = mongoose.model("Reminder", ReminderSchema);
@@ -294,6 +297,7 @@ module.exports = Reminder;
 
 Great! Now that we have an interface for our models, let's create a seed file so we have some data to work with in our application.
 
+<!--WDI6 2:40  -->
 <!--WDI5 2:52  -->
 <!--WDI4 2:48 -->
 
@@ -338,6 +342,7 @@ Feel free to personalize the reminders to suit your own interests and errands.
 
 Now run the seed file in order to add these default values to our Database, by typing ```node db/seed.js``` in the terminal.
 
+<!--WDI6 2:58, coming back 3:10  -->
 <!--WDI5 3:06  -->
 <!--WDI4 2:55 -->
 
@@ -383,6 +388,7 @@ app.listen(port, function() {
 >Challenge: Build out your own server file.  Make sure it works by running it with ```node``` or ```nodemon```.
 
 <!--WDI5 3:15 -->
+<!--WDI6 3:32  -->
 <!--2:40 15 minutes -->
 
 ## Reminders Index
@@ -410,6 +416,7 @@ let remindersController = {
 module.exports = remindersController;
 ```
 
+<!--WDI6 3:45  -->
 <!--3:28 WDI5 -->
 
 Now we're referencing an ejs view that doesn't exist yet. Lets create that now, as well as our layout view:
@@ -459,6 +466,7 @@ In `views/reminders/index.ejs`:
 
 >Challenge: Create these template files in your own project.  What happens when you try to go to ```localhost:3000/reminders```?
 
+<!--4:13 WDI6 -->
 <!--3:05 15 minutes -->
 
 ## New Reminder
@@ -518,7 +526,7 @@ module.exports = remindersController;
 
 * First, verify that a user can see reminders on ```localhost:3000/reminders```.  Also, check that a user can make a new reminder by going to ```localhost:3000/reminders/new```.
 
-
+<!--WDI6 4:36, enormous amount of confusions and people getting lost -->
 <!--CFU: Think-pair-share: What is the most important thing you learned to do today (Mongo or Mongoose)? -->
 
 <!-- Closing
